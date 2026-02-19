@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const pages = [
   { href: "/", label: "Home" },
@@ -15,9 +16,18 @@ export default function Footer() {
     <footer className="border-t border-gray-200 py-16 px-6">
       <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-10">
         <div>
-          <p className="font-semibold text-gray-900 mb-2">
-            New Wave Acquisitions
-          </p>
+          <Link href="/" className="flex items-center gap-2 mb-2">
+            <Image
+              src="/logo.png"
+              alt="New Wave Acquisitions"
+              width={32}
+              height={32}
+              className="flex-shrink-0"
+            />
+            <span className="font-semibold text-gray-900">
+              New Wave Acquisitions
+            </span>
+          </Link>
           <p className="text-sm text-gray-500 leading-relaxed">
             Book-based acquisition infrastructure for high-ticket service
             businesses.

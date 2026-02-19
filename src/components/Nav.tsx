@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const navLinks = [
@@ -19,9 +20,16 @@ export default function Nav() {
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-gray-900"
+          className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-gray-900"
         >
-          New Wave Acquisitions
+          <Image
+            src="/logo.png"
+            alt="New Wave Acquisitions"
+            width={36}
+            height={36}
+            className="flex-shrink-0"
+          />
+          <span className="hidden sm:inline">New Wave Acquisitions</span>
         </Link>
 
         {/* Desktop: center/right links */}
