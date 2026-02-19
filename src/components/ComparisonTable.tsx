@@ -60,9 +60,12 @@ function CheckIcon() {
 export default function ComparisonTable() {
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-center mb-10">
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-center mb-4">
         Renting vs Owning
       </h2>
+      <p className="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-10 leading-relaxed">
+        Most funnels rent attention and hope it converts. This system owns demand.
+      </p>
       <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
         <div className="grid grid-cols-2 border-b border-gray-200">
           <div className="p-4 md:p-5 border-r border-gray-200 bg-gray-50/80">
