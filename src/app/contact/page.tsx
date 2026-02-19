@@ -24,7 +24,7 @@ export default function ContactPage() {
             CONTACT
           </p>
           <h1 className="text-4xl md:text-5xl font-bold tracking-[-0.02em] leading-[1.08] mb-6">
-            Let's talk.
+            Let&apos;s talk.
           </h1>
           <p className="text-lg text-gray-600 leading-[1.55]">
             For partnerships, press, or general inquiries.

@@ -45,7 +45,7 @@ export default function ProductPage() {
             Intellibook embeds SMS prompts, QR codes, and trackable micro-CTAs
             into a physical or digital book. Every reader interaction is
             captured — not just who bought, but who read what, engaged where,
-            and signaled intent. This is not a landing page or a funnel. It's
+            and signaled intent. This is not a landing page or a funnel. It&apos;s
             an acquisition layer built into the book itself.
           </p>
           <div className="w-full aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-8">
@@ -86,7 +86,7 @@ export default function ProductPage() {
             The AI SDR is trained on your voice, your offer, your qualifying
             criteria. It engages every captured lead via SMS or chat, asks the
             right questions, handles objections, and books qualified calls on
-            your calendar. It's not a chatbot. It's an AI-powered sales
+            your calendar. It&apos;s not a chatbot. It&apos;s an AI-powered sales
             development rep that represents you.
           </p>
           <div className="w-full aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-8">

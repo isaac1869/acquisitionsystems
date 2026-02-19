@@ -27,7 +27,7 @@ export default function AboutPage() {
             Built by operators, not agencies.
           </h1>
           <p className="text-lg text-gray-600 leading-[1.55]">
-            We didn't build this from a conference room. We built it because we
+            We didn&apos;t build this from a conference room. We built it because we
             needed it.
           </p>
         </div>
@@ -92,8 +92,8 @@ export default function AboutPage() {
             is enticing — irrespective of how I get there.&rdquo;
           </blockquote>
           <p className="text-sm text-gray-600">
-            That's the standard we hold ourselves to. If the system doesn't
-            drive revenue, it doesn't ship.
+            That&apos;s the standard we hold ourselves to. If the system doesn&apos;t
+            drive revenue, it doesn&apos;t ship.
           </p>
         </div>
       </SectionWrapper>
