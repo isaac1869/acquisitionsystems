@@ -22,8 +22,8 @@ export default function StatementSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{
-                  duration: 0.5,
-                  delay: i * 0.15,
+                  duration: 0.85,
+                  delay: i * 0.35,
                   ease: "easeOut",
                 }}
                 className={`inline-block mr-3 ${
@@ -42,8 +42,8 @@ export default function StatementSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{
-                  duration: 0.5,
-                  delay: (i + 2) * 0.15,
+                  duration: 0.85,
+                  delay: (i + 2) * 0.35,
                   ease: "easeOut",
                 }}
                 className={`inline-block mr-3 ${
