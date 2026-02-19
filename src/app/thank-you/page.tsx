@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "Thank You",
@@ -20,6 +21,7 @@ const steps = [
 
 export default function ThankYouPage() {
   return (
+    <PageTransition>
     <section className="pt-16 md:pt-24 pb-24 px-6 fade-in">
       <div className="max-w-xl mx-auto text-center">
         <h1 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] leading-[1.08] mb-4">
@@ -54,5 +56,6 @@ export default function ThankYouPage() {
         </div>
       </div>
     </section>
+    </PageTransition>
   );
 }

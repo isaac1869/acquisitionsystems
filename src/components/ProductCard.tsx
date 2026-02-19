@@ -13,8 +13,8 @@ export default function ProductCard({
 }: ProductCardProps) {
   return (
     <div
-      className={`bg-white p-6 md:p-8 border border-gray-200 rounded-xl transition-all duration-200 hover:-translate-y-1 hover:shadow-md ${
-        highlight ? "ring-1 ring-electric-cyan/30" : ""
+      className={`bg-white border rounded-xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-electric-cyan/40 hover:shadow-[0_8px_30px_rgba(0,240,255,0.1)] ${
+        highlight ? "ring-1 ring-electric-cyan/30" : "border-gray-200"
       }`}
     >
       <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">

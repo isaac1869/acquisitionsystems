@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "Terms",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
+    <PageTransition>
     <section className="pt-16 md:pt-24 pb-24 px-6 fade-in">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold tracking-tight mb-6">Terms of Service</h1>
@@ -15,5 +17,6 @@ export default function TermsPage() {
         </p>
       </div>
     </section>
+    </PageTransition>
   );
 }

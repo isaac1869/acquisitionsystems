@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import StickyCTA from "@/components/StickyCTA";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Nav />
         <main>{children}</main>
         <Footer />
+        <StickyCTA />
         <ScrollReveal />
       </body>
     </html>

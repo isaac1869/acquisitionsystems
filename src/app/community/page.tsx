@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageTransition from "@/components/PageTransition";
 
 const description =
   "Join the operators building acquisition systems. A private group for high-ticket service providers using books, AI SDRs, and CoreText.";
@@ -25,7 +26,7 @@ const bullets = [
 
 export default function CommunityPage() {
   return (
-    <>
+    <PageTransition>
       <section className="pt-16 md:pt-24 pb-16 md:pb-20 px-6 fade-in">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">
@@ -74,6 +75,6 @@ export default function CommunityPage() {
           </p>
         </div>
       </SectionWrapper>
-    </>
+    </PageTransition>
   );
 }

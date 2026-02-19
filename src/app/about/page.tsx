@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SectionWrapper from "@/components/SectionWrapper";
 import Button from "@/components/Button";
+import PageTransition from "@/components/PageTransition";
 
 const description =
   "Built by operators, not agencies. The story behind New Wave Acquisitions and the team.";
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <>
+    <PageTransition>
       <section className="pt-16 md:pt-24 pb-16 md:pb-20 px-6 fade-in">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">
@@ -104,6 +105,6 @@ export default function AboutPage() {
           <Button href="/apply">Apply for Early Access</Button>
         </div>
       </SectionWrapper>
-    </>
+    </PageTransition>
   );
 }

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import SectionWrapper from "@/components/SectionWrapper";
 import FormField from "@/components/FormField";
 import Button from "@/components/Button";
+import PageTransition from "@/components/PageTransition";
 
 const REVENUE_OPTIONS = [
   { value: "under-100k", label: "Under $100k" },
@@ -136,7 +137,7 @@ export default function ApplyPage() {
   };
 
   return (
-    <>
+    <PageTransition>
       <section className="pt-16 md:pt-24 pb-8 px-6 fade-in">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">
@@ -267,6 +268,6 @@ export default function ApplyPage() {
           </form>
         </div>
       </SectionWrapper>
-    </>
+    </PageTransition>
   );
 }

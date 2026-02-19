@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SectionWrapper from "@/components/SectionWrapper";
 import Button from "@/components/Button";
+import PageTransition from "@/components/PageTransition";
 
 const description =
   "Three layers, one acquisition engine: Intellibook, AI SDR Twin, and CoreText. Deep dive into the system.";
@@ -15,9 +16,18 @@ export const metadata: Metadata = {
   },
 };
 
+const whatYouGet = [
+  { title: "Ghostwriting + distribution", desc: "We extract your methodology, write the book, and distribute it end-to-end." },
+  { title: "AI SDR twin trained on your methodology", desc: "Your AI SDR engages readers, answers questions, and routes qualified interest into your pipeline." },
+  { title: "Reader intent capture + routing", desc: "Intellibook captures reader actions and turns them into clear intent signals you can act on." },
+  { title: "CoreText attribution + reporting", desc: "CoreText shows what chapters, triggers, and conversations actually produced pipeline." },
+  { title: "Implementation support", desc: "We handle the technical setup so the system works without you stitching tools together." },
+  { title: "Selective onboarding", desc: "We onboard one brand per month, and only when we can forecast a path to ROI." },
+];
+
 export default function ProductPage() {
   return (
-    <>
+    <PageTransition>
       <section className="pt-16 md:pt-24 pb-16 md:pb-20 px-6 fade-in">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">
@@ -30,6 +40,23 @@ export default function ProductPage() {
             Every piece is built to work together — from the moment someone
             opens your book to the moment they book a call.
           </p>
+        </div>
+      </section>
+
+      {/* Sales Video Placeholder */}
+      <section className="py-12 md:py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="aspect-video bg-gray-100 rounded-xl flex items-center justify-center border border-gray-200">
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-200 flex items-center justify-center">
+                <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <p className="text-sm font-medium text-gray-500">Sales Video Coming Soon</p>
+              <p className="text-xs text-gray-400 mt-1">See the full system walkthrough</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -185,12 +212,34 @@ export default function ProductPage() {
         </div>
       </SectionWrapper>
 
+      {/* What You Get - moved from homepage */}
+      <SectionWrapper>
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-center mb-12">
+            What you get
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whatYouGet.map((item, i) => (
+              <div
+                key={i}
+                className="bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-300 transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+              >
+                <h3 className="font-semibold text-gray-900">{item.title}</h3>
+                <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </SectionWrapper>
+
       <SectionWrapper bg="gray">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-gray-600 mb-6">Ready to see it in action?</p>
           <Button href="/apply">Apply for Early Access</Button>
         </div>
       </SectionWrapper>
-    </>
+    </PageTransition>
   );
 }

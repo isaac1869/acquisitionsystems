@@ -25,9 +25,6 @@ export default function HeroVideo() {
           <p className="text-xs mt-1">Add hero-loop.mp4 to public/static/</p>
         </div>
       )}
-      <p className="text-sm font-medium text-gray-600 text-center mt-6">
-        Reading becomes data. Data becomes pipeline.
-      </p>
     </div>
   );
 }
