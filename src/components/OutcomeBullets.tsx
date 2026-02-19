@@ -20,7 +20,7 @@ function CheckDot() {
 
 export default function OutcomeBullets() {
   return (
-    <section className="py-16 md:py-20 px-6 bg-gray-50/60">
+    <section className="py-16 md:py-20 px-6 bg-white">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-center mb-10">
           What changes when your book works for you

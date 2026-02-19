@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function SwanwickQuote() {
   return (
-    <section className="py-16 md:py-24 px-6 bg-gray-50">
+    <section className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-3xl mx-auto text-center">
         <motion.blockquote
           initial={{ opacity: 0, y: 16 }}

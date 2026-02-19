@@ -56,7 +56,7 @@ export default function HomePage() {
       <StatementSection />
 
       {/* 3. Product Tiles */}
-      <SectionWrapper bg="gray">
+      <SectionWrapper>
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             <ProductCard
@@ -89,7 +89,7 @@ export default function HomePage() {
       <NegativeCAC />
 
       {/* 7. Renting vs Owning */}
-      <SectionWrapper bg="gray">
+      <SectionWrapper>
         <ComparisonTable />
       </SectionWrapper>
 
