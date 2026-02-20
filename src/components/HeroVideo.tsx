@@ -18,7 +18,7 @@ export default function HeroVideo() {
           aria-label="Reading becomes data. Data becomes pipeline."
           onError={() => setVideoError(true)}
         >
-          <source src="/static/hero-loop-v2.mp4" type="video/mp4" />
+          <source src="/static/Hero-loop-v2.mp4" type="video/mp4" />
         </video>
       ) : (
         <div className="w-full h-full flex flex-col items-center justify-center text-gray-500 bg-[#05070A]">
