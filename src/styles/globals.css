@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./demo-styles.css";
-
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
