@@ -1,110 +1,367 @@
-export const dashboardMetrics = [
-  { label: "Books Sold", value: 347, prefix: "", suffix: "", isMoney: false },
-  { label: "Active Readers", value: 1204, prefix: "", suffix: "", isMoney: false },
-  { label: "AI Twin Conversations", value: 892, prefix: "", suffix: "", isMoney: false },
-  { label: "Calls Booked", value: 23, prefix: "", suffix: "", isMoney: false },
-  { label: "High-Ticket Closes", value: 4, prefix: "", suffix: "", isMoney: false },
-  { label: "Book Revenue", value: 17350, prefix: "$", suffix: "", isMoney: true },
-  { label: "High-Ticket Revenue", value: 60000, prefix: "$", suffix: "", isMoney: true },
-  { label: "Effective CAC", value: -47, prefix: "$", suffix: "", isMoney: true, isNegativeCAC: true },
-];
+// lib/demoData.ts
+// All sample data for the Intellibook product demo
+// This data should feel realistic — not inflated, not deflated
+
+// ─── DASHBOARD METRICS ───────────────────────────────────────────
+
+export const dashboardMetrics = {
+  booksSoldThisMonth: 347,
+  activeReaders: 1204,
+  aiTwinConversations: 892,
+  callsBooked: 23,
+  highTicketCloses: 4,
+  frontEndBookRevenue: 17350,
+  highTicketRevenue: 60000,
+  totalRevenue: 77350,
+  adSpendThisMonth: 17350,
+  effectiveCAC: -47, // THIS IS THE MONEY NUMBER — negative means the system pays for itself
+};
+
+// ─── FUNNEL DATA ─────────────────────────────────────────────────
 
 export const funnelStages = [
-  { label: "Books Sold", value: 347, pct: 100 },
-  { label: "Triggers Activated", value: 204, pct: 58.8 },
-  { label: "AI Conversations", value: 128, pct: 36.9 },
-  { label: "Calls Booked", value: 23, pct: 6.6 },
-  { label: "Closed", value: 4, pct: 1.2 },
+  { label: "Books Sold", value: 347, percentage: 100 },
+  { label: "Triggers Activated", value: 204, percentage: 58.8 },
+  { label: "AI Twin Conversations", value: 128, percentage: 36.9 },
+  { label: "Calls Booked", value: 23, percentage: 6.6 },
+  { label: "Closed", value: 4, percentage: 1.2 },
 ];
 
-export interface FeedEvent {
+// ─── ACTIVITY FEED EVENTS ────────────────────────────────────────
+// These rotate through the feed on a timer (every 2-4 seconds)
+// Types: "reader" | "ai_twin" | "trigger" | "booking" | "close" | "engagement"
+
+export type ActivityEventType = "reader" | "ai_twin" | "trigger" | "booking" | "close" | "engagement";
+
+export interface ActivityEvent {
+  id: string;
+  type: ActivityEventType;
   icon: string;
   message: string;
   location?: string;
-  isHighlight?: boolean;
+  timestamp: string; // relative, e.g., "just now", "2m ago"
+  isHighlight?: boolean; // true for closes and bookings — gets special styling
 }
 
-export const feedEvents: FeedEvent[] = [
-  { icon: "📖", message: "Reader #1,204 opened Chapter 3", location: "Houston, TX" },
-  { icon: "💬", message: "AI Twin conversation — Topic: Pricing framework" },
-  { icon: "📱", message: "SMS trigger — Reader scanned QR in Chapter 7" },
-  { icon: "📖", message: "Reader #892 completed book — 4hr 23min read time" },
-  { icon: "🎯", message: "AI Twin qualified Reader #892 as HIGH INTENT", isHighlight: true },
-  { icon: "📅", message: "Call booked — Reader #892 → March 3", isHighlight: true },
-  { icon: "💬", message: "Reader #1,187 asked about certification program" },
-  { icon: "📦", message: "New book sale — Bundle #348", location: "Austin, TX" },
-  { icon: "💰", message: "HIGH-TICKET CLOSE — Reader #341 → $15,000", isHighlight: true },
-  { icon: "🔗", message: "Reader #1,102 shared QR code with colleague" },
-  { icon: "💬", message: "AI Twin handled objection — Time commitment" },
-  { icon: "📖", message: "Reader #956 returned to Chapter 5 (2nd read)" },
-  { icon: "📱", message: "SMS trigger — Reader downloaded bonus toolkit" },
-  { icon: "📦", message: "New book sale — Bundle #349", location: "Miami, FL" },
-  { icon: "🎯", message: "AI Twin qualified Reader #1,187 as WARM" },
-  { icon: "📅", message: "Call booked — Reader #1,187 → March 5", isHighlight: true },
-  { icon: "📖", message: "Reader #1,198 highlighted 3 passages in Ch. 4" },
-  { icon: "⭐", message: "Reader #780 left 5-star review on Amazon" },
-  { icon: "📦", message: "New book sale — Bundle #350", location: "Nashville, TN" },
-  { icon: "💰", message: "HIGH-TICKET CLOSE — Reader #1,044 → $20,000", isHighlight: true },
+export const activityFeedEvents: Omit<ActivityEvent, "id" | "timestamp">[] = [
+  {
+    type: "reader",
+    icon: "📖",
+    message: "Reader #1,204 opened Chapter 3",
+    location: "Houston, TX",
+  },
+  {
+    type: "ai_twin",
+    icon: "💬",
+    message: "AI Twin conversation started — Topic: Pricing framework",
+  },
+  {
+    type: "trigger",
+    icon: "📱",
+    message: "SMS trigger activated — Reader scanned QR in Chapter 7",
+  },
+  {
+    type: "reader",
+    icon: "📖",
+    message: "Reader #892 completed book — 4hr 23min total read time",
+  },
+  {
+    type: "ai_twin",
+    icon: "🎯",
+    message: "AI Twin qualified Reader #892 as HIGH INTENT",
+    isHighlight: true,
+  },
+  {
+    type: "booking",
+    icon: "📅",
+    message: "Call booked — Reader #892 → Sales calendar, March 3",
+    isHighlight: true,
+  },
+  {
+    type: "ai_twin",
+    icon: "💬",
+    message: "Reader #1,187 asked AI Twin about certification program",
+  },
+  {
+    type: "reader",
+    icon: "📦",
+    message: "New book sale — Bundle #348",
+    location: "Austin, TX",
+  },
+  {
+    type: "close",
+    icon: "💰",
+    message: "HIGH-TICKET CLOSE — Reader #341 → $15,000 program",
+    isHighlight: true,
+  },
+  {
+    type: "engagement",
+    icon: "🔗",
+    message: "Reader #1,102 shared book QR code with colleague",
+  },
+  {
+    type: "ai_twin",
+    icon: "💬",
+    message: "AI Twin handled objection — Topic: Time commitment",
+  },
+  {
+    type: "reader",
+    icon: "📖",
+    message: "Reader #956 returned to Chapter 5 (second read)",
+  },
+  {
+    type: "trigger",
+    icon: "📱",
+    message: "SMS trigger activated — Reader downloaded bonus toolkit",
+  },
+  {
+    type: "reader",
+    icon: "📦",
+    message: "New book sale — Bundle #349",
+    location: "Miami, FL",
+  },
+  {
+    type: "ai_twin",
+    icon: "🎯",
+    message: "AI Twin qualified Reader #1,187 as WARM",
+  },
+  {
+    type: "booking",
+    icon: "📅",
+    message: "Call booked — Reader #1,187 → Sales calendar, March 5",
+    isHighlight: true,
+  },
+  {
+    type: "reader",
+    icon: "📖",
+    message: "Reader #1,198 highlighted 3 passages in Chapter 4",
+  },
+  {
+    type: "engagement",
+    icon: "⭐",
+    message: "Reader #780 left 5-star review on Amazon",
+  },
+  {
+    type: "reader",
+    icon: "📦",
+    message: "New book sale — Bundle #350",
+    location: "Nashville, TN",
+  },
+  {
+    type: "close",
+    icon: "💰",
+    message: "HIGH-TICKET CLOSE — Reader #1,044 → $20,000 program",
+    isHighlight: true,
+  },
 ];
 
-export const attributionNodes = [
-  { day: 1, date: "Feb 3", event: "Book Purchased", detail: "$100 bundle via Facebook ad", type: "purchase" as const },
-  { day: 3, date: "Feb 5", event: "Started Reading", detail: "Chapters 1–3, 1hr 12min", type: "reading" as const },
-  { day: 5, date: "Feb 7", event: "QR Trigger", detail: "Scanned Chapter 3 — pricing video", type: "engagement" as const },
-  { day: 5, date: "Feb 7", event: "AI Twin Chat", detail: "4 follow-up questions, high intent", type: "engagement" as const },
-  { day: 7, date: "Feb 9", event: "Qualified: HOT", detail: "Score: 8.7/10 — priority routing", type: "qualification" as const },
-  { day: 8, date: "Feb 10", event: "Call Booked", detail: "Self-booked for Feb 14", type: "booking" as const },
-  { day: 12, date: "Feb 14", event: "$15,000 Close", detail: "11 days: book → client", type: "close" as const },
+// ─── SAMPLE READER PROFILE ──────────────────────────────────────
+
+export interface ReaderProfile {
+  name: string;
+  location: string;
+  bookPurchased: string;
+  chaptersRead: number;
+  totalChapters: number;
+  totalReadTime: string;
+  readingSessions: number;
+  qrScans: { chapter: number; action: string }[];
+  aiTwinConversations: { topic: string; outcome: string }[];
+  qualificationScore: number; // 0-10
+  qualificationLabel: "COLD" | "WARM" | "HOT";
+  status: string;
+  predictedCloseRate: number; // percentage
+}
+
+export const sampleReaderProfile: ReaderProfile = {
+  name: "Michael R.",
+  location: "Scottsdale, AZ",
+  bookPurchased: "Feb 3, 2026",
+  chaptersRead: 7,
+  totalChapters: 12,
+  totalReadTime: "3hr 47min",
+  readingSessions: 5,
+  qrScans: [
+    { chapter: 2, action: "Downloaded assessment worksheet" },
+    { chapter: 3, action: "Accessed pricing framework video" },
+    { chapter: 7, action: "Started AI Twin conversation" },
+  ],
+  aiTwinConversations: [
+    { topic: "Asked about pricing model", outcome: "Engaged — asked 4 follow-up questions" },
+    { topic: "Asked about certification process", outcome: "HIGH INTENT — requested call booking" },
+  ],
+  qualificationScore: 8.7,
+  qualificationLabel: "HOT",
+  status: "Call booked — Feb 24",
+  predictedCloseRate: 73,
+};
+
+// ─── ATTRIBUTION TIMELINE ────────────────────────────────────────
+
+export interface AttributionNode {
+  day: number;
+  date: string;
+  event: string;
+  detail: string;
+  type: "purchase" | "reading" | "engagement" | "qualification" | "booking" | "close";
+}
+
+export const attributionTimeline: AttributionNode[] = [
+  {
+    day: 1,
+    date: "Feb 3",
+    event: "Book Purchased",
+    detail: "Bundle #312 — $100 via Facebook ad (Campaign: Expert_Retarget_Feb)",
+    type: "purchase",
+  },
+  {
+    day: 3,
+    date: "Feb 5",
+    event: "Started Reading",
+    detail: "Chapters 1–3 completed in first session (1hr 12min)",
+    type: "reading",
+  },
+  {
+    day: 5,
+    date: "Feb 7",
+    event: "QR Trigger Activated",
+    detail: "Scanned QR in Chapter 3 — accessed pricing framework video",
+    type: "engagement",
+  },
+  {
+    day: 5,
+    date: "Feb 7",
+    event: "AI Twin Conversation",
+    detail: "Asked about pricing model, 4 follow-up questions. AI Twin identified high intent",
+    type: "engagement",
+  },
+  {
+    day: 7,
+    date: "Feb 9",
+    event: "Qualified: HIGH INTENT",
+    detail: "Qualification score: 8.7/10 — triggered priority routing",
+    type: "qualification",
+  },
+  {
+    day: 8,
+    date: "Feb 10",
+    event: "Call Booked",
+    detail: "AI Twin suggested call → Reader self-booked for Feb 14",
+    type: "booking",
+  },
+  {
+    day: 12,
+    date: "Feb 14",
+    event: "HIGH-TICKET CLOSE",
+    detail: "$15,000 — Project 90 program. Time from book purchase to close: 11 days",
+    type: "close",
+  },
 ];
 
-export const aiTwinConversations = [
-  {
-    trigger: "How do I actually implement value-based pricing?",
-    messages: [
-      { role: "reader" as const, text: "I just read Chapter 3 on value-based pricing. How do I actually implement this with my current clients? Do I just raise my prices?" },
-      { role: "twin" as const, text: "Not quite — raising prices without restructuring the offer is the most common mistake. What Chapter 3 is getting at is reframing the conversation entirely. Instead of 'here's what I deliver,' you lead with 'here's the outcome I create.'" },
-      { role: "twin" as const, text: "For example, if you're a health coach charging $3,000 for a 12-week program, the shift isn't charging $5,000 for the same thing. It's restructuring around the transformation — 'lose 30 pounds and keep it off for a year' — and pricing that outcome." },
-      { role: "twin" as const, text: "I walk through this in more detail in Chapter 5. But if you want help applying this to your specific offer, that's exactly what the program is designed for. Want me to check if there's availability?" },
-    ],
+// ─── ACT 3: COMPARISON DATA ─────────────────────────────────────
+
+export const comparisonData = {
+  current: {
+    label: "Your Current Model",
+    monthlyAdSpend: 25000,
+    leadsGenerated: 500,
+    leadQuality: "Cold opt-ins who haven't read anything",
+    showRate: "50%",
+    closeRate: "10%",
+    clientsClosed: 25,
+    trueCAC: 4200,
+    monthlyRevenue: 375000,
+    monthlyNet: 270000,
   },
-  {
-    trigger: "What if my clients push back on higher pricing?",
-    messages: [
-      { role: "reader" as const, text: "I love the concept but my market is price-sensitive. What if clients push back?" },
-      { role: "twin" as const, text: "That's actually addressed in Chapter 6 — the objection handling framework. But here's the short version: price resistance almost always means the prospect doesn't yet see the value gap between where they are and where your program takes them." },
-      { role: "twin" as const, text: "The book covers three specific techniques for widening that gap before you ever mention price. Most experts do it backward — they pitch the price, then try to justify it. The framework flips that." },
-      { role: "twin" as const, text: "If you want to practice this with your actual offer, we do live role-plays inside the program. Should I see if there's a spot this month?" },
-    ],
+  intellibook: {
+    label: "With Intellibook",
+    monthlyAdSpend: 25000,
+    booksSold: 500,
+    bookProfit: 25000,
+    leadQuality: "Warm buyers who paid, read, and trust you",
+    showRate: "85%",
+    closeRate: "20%",
+    highTicketCloses: 5,
+    trueCAC: -5000, // Negative — book revenue exceeds ad cost per close
+    highTicketRevenue: 75000,
+    totalRevenue: 100000,
+    monthlyNet: 75000,
   },
-  {
-    trigger: "How long before I see results?",
-    messages: [
-      { role: "reader" as const, text: "This all makes sense conceptually. But realistically, how long before I see a difference in my business?" },
-      { role: "twin" as const, text: "Most people who implement the full framework from the book see their first pricing restructure produce results within 30 days — usually a 20-40% increase in average deal size without losing close rate." },
-      { role: "twin" as const, text: "The bigger shift happens around month 3, when the positioning work from Chapters 7-9 kicks in and your inbound quality changes. That's when clients start coming to you pre-sold instead of price-shopping." },
-      { role: "twin" as const, text: "But it depends heavily on your starting point. The program includes a diagnostic in the first week that gives you a specific timeline based on your current numbers. Want to explore that?" },
-    ],
-  },
-];
+};
+
+// ─── ACT 3: 12-MONTH COMPOUNDING CHART DATA ─────────────────────
 
 export const compoundingChartData = [
-  { month: "Jan", traditional: 270, intellibook: 75 },
-  { month: "Feb", traditional: 265, intellibook: 82 },
-  { month: "Mar", traditional: 258, intellibook: 95 },
-  { month: "Apr", traditional: 250, intellibook: 115 },
-  { month: "May", traditional: 242, intellibook: 140 },
-  { month: "Jun", traditional: 235, intellibook: 172 },
-  { month: "Jul", traditional: 228, intellibook: 210 },
-  { month: "Aug", traditional: 220, intellibook: 255 },
-  { month: "Sep", traditional: 212, intellibook: 305 },
-  { month: "Oct", traditional: 205, intellibook: 362 },
-  { month: "Nov", traditional: 198, intellibook: 425 },
-  { month: "Dec", traditional: 190, intellibook: 495 },
+  { month: "Jan", traditional: 270000, intellibook: 75000 },
+  { month: "Feb", traditional: 265000, intellibook: 82000 },
+  { month: "Mar", traditional: 258000, intellibook: 95000 },
+  { month: "Apr", traditional: 250000, intellibook: 115000 },
+  { month: "May", traditional: 242000, intellibook: 140000 },
+  { month: "Jun", traditional: 235000, intellibook: 172000 },
+  { month: "Jul", traditional: 228000, intellibook: 210000 },
+  { month: "Aug", traditional: 220000, intellibook: 255000 },
+  { month: "Sep", traditional: 212000, intellibook: 305000 },
+  { month: "Oct", traditional: 205000, intellibook: 362000 },
+  { month: "Nov", traditional: 198000, intellibook: 425000 },
+  { month: "Dec", traditional: 190000, intellibook: 495000 },
 ];
+
+// ─── AI TWIN SAMPLE CONVERSATIONS ───────────────────────────────
+// Pre-scripted paths for the interactive demo in Act 1
+
+export interface ChatMessage {
+  role: "reader" | "twin";
+  text: string;
+  delayMs: number; // delay before this message appears
+}
+
+export interface ConversationPath {
+  triggerQuestion: string; // What the user clicks to start this path
+  messages: ChatMessage[];
+}
+
+export const aiTwinConversations: ConversationPath[] = [
+  {
+    triggerQuestion: "How does the pricing framework actually work?",
+    messages: [
+      { role: "reader", text: "How does the pricing framework actually work? The book mentions value-based pricing but I want to understand the implementation.", delayMs: 0 },
+      { role: "twin", text: "Great question — you're on Chapter 3, so you've seen the foundation. The framework has three layers: anchor pricing, tiered packaging, and what I call the \"outcome guarantee stack.\"", delayMs: 1500 },
+      { role: "twin", text: "The short version: most experts undercharge by 3-5x because they price on deliverables instead of outcomes. When you restructure around the transformation you create, the economics change completely.", delayMs: 3000 },
+      { role: "twin", text: "If you want to see how this applies to YOUR specific offer, I can walk you through it. Or — if you're ready to go deep — we do this as a full diagnostic inside the program. Want me to check if there's a spot open this month?", delayMs: 4500 },
+    ],
+  },
+  {
+    triggerQuestion: "What results have other people gotten?",
+    messages: [
+      { role: "reader", text: "What kind of results have other people gotten from this?", delayMs: 0 },
+      { role: "twin", text: "Depends on where they start — but the pattern is consistent. Most experts who implement the full system see their cost to acquire a client drop by 60-80% within the first 90 days.", delayMs: 1500 },
+      { role: "twin", text: "One practitioner went from spending $9,000 per client on Facebook to acquiring clients at essentially zero cost through the book funnel. Another scaled from $1.2M to $3.4M in 14 months without increasing ad spend.", delayMs: 3000 },
+      { role: "twin", text: "The common thread isn't the tactic — it's having a system that compounds instead of resets every month. That's what the program builds for you. Should I send you the details?", delayMs: 4500 },
+    ],
+  },
+  {
+    triggerQuestion: "I'm not sure this applies to my niche.",
+    messages: [
+      { role: "reader", text: "This is interesting but I'm not sure it applies to my specific niche. I'm in a pretty specialized space.", delayMs: 0 },
+      { role: "twin", text: "That's actually the best position to be in. The more specialized your expertise, the more powerful a book becomes as an acquisition tool — because you're the definitive authority in a defined space.", delayMs: 1500 },
+      { role: "twin", text: "What's your area? I can tell you specifically how other experts in adjacent spaces have applied this.", delayMs: 3000 },
+      { role: "twin", text: "Either way — if you have a high-ticket offer and you're spending on ads to fill it, the economics work regardless of niche. The book just becomes the bridge between 'stranger who saw your ad' and 'warm prospect who trusts your thinking.' Want to explore what this looks like for your business specifically?", delayMs: 4500 },
+    ],
+  },
+];
+
+// ─── BOOK PAGE SAMPLE CONTENT ────────────────────────────────────
+// Simulated book text for Act 1
 
 export const bookPageContent = {
   chapterTitle: "Chapter 3: The Acquisition Inversion",
-  body: "Most experts approach client acquisition backward. They spend money to interrupt strangers, push them into a funnel, and hope a small percentage convert. Every month, the meter resets.\n\nBut what if the equation could be inverted entirely? What if, instead of paying to reach cold prospects, you could get paid by warm prospects — people who already know your methodology and have demonstrated commitment with their wallet?",
-  ctaText: "Unlock the complete Acquisition Inversion toolkit",
-  ctaInstruction: "Scan or text UNLOCK to 555-0100",
+  bodyText: `Most experts approach client acquisition backward. They spend money to interrupt strangers, push them into a funnel, and hope a small percentage convert. Every month, the meter resets. Every month, the cost goes up.
+
+But what if the equation could be inverted entirely?
+
+What if, instead of paying to reach cold prospects, you could get paid by warm prospects — people who already know your methodology, trust your thinking, and have demonstrated commitment with their wallet — before they ever speak to your sales team?
+
+That's not a hypothetical. It's a model that's already working for a small number of experts who've figured out what the book actually is: not a product, but an acquisition engine.`,
+  qrCallToAction: "Unlock the complete Acquisition Inversion toolkit — including the calculator that shows your exact numbers.",
+  qrInstruction: "Scan or text UNLOCK to 555-0100",
 };

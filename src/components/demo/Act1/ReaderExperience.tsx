@@ -23,7 +23,7 @@ function BookMockup({ onQRClick }: { onQRClick: () => void }) {
               {bookPageContent.chapterTitle}
             </p>
             <div className="space-y-3 text-[#999] text-sm leading-relaxed">
-              {bookPageContent.body.split("\n\n").map((p, i) => (
+              {bookPageContent.bodyText.split("\n\n").map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
@@ -70,10 +70,10 @@ function BookMockup({ onQRClick }: { onQRClick: () => void }) {
                 </motion.div>
                 <div>
                   <p className="text-[#F5F5F5] text-sm font-medium">
-                    {bookPageContent.ctaText}
+                    {bookPageContent.qrCallToAction}
                   </p>
                   <p className="text-[#666] text-xs mt-1 font-mono">
-                    {bookPageContent.ctaInstruction}
+                    {bookPageContent.qrInstruction}
                   </p>
                 </div>
               </div>
@@ -138,7 +138,7 @@ function AITwinChat() {
                   className="w-full text-left px-4 py-3 rounded-lg border border-[rgba(0,229,204,0.2)] text-sm text-[#F5F5F5] hover:border-[#00E5CC] hover:bg-[rgba(0,229,204,0.05)] transition-all"
                   whileHover={{ x: 4 }}
                 >
-                  {conv.trigger}
+                  {conv.triggerQuestion}
                 </motion.button>
               ))}
             </div>

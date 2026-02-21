@@ -5,7 +5,21 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { FadeReveal } from "../ui/FadeReveal";
 import { AnimatedNumber } from "../ui/AnimatedNumber";
 import { useActivityFeed } from "@/hooks/useActivityFeed";
-import { dashboardMetrics, funnelStages, attributionNodes } from "@/lib/demoData";
+import { dashboardMetrics as dashboardMetricsObj, funnelStages, attributionTimeline as attributionNodes } from "@/lib/demoData";
+
+// Adapt object shape to array shape expected by this component
+const dashboardMetrics = [
+  { label: "Books Sold", value: dashboardMetricsObj.booksSoldThisMonth, prefix: "", isMoney: false, isNegativeCAC: false },
+  { label: "Active Readers", value: dashboardMetricsObj.activeReaders, prefix: "", isMoney: false, isNegativeCAC: false },
+  { label: "AI Conversations", value: dashboardMetricsObj.aiTwinConversations, prefix: "", isMoney: false, isNegativeCAC: false },
+  { label: "Calls Booked", value: dashboardMetricsObj.callsBooked, prefix: "", isMoney: false, isNegativeCAC: false },
+  { label: "HT Closes", value: dashboardMetricsObj.highTicketCloses, prefix: "", isMoney: false, isNegativeCAC: false },
+  { label: "Book Revenue", value: dashboardMetricsObj.frontEndBookRevenue, prefix: "$", isMoney: true, isNegativeCAC: false },
+  { label: "HT Revenue", value: dashboardMetricsObj.highTicketRevenue, prefix: "$", isMoney: true, isNegativeCAC: false },
+  { label: "Total Revenue", value: dashboardMetricsObj.totalRevenue, prefix: "$", isMoney: true, isNegativeCAC: false },
+  { label: "Ad Spend", value: dashboardMetricsObj.adSpendThisMonth, prefix: "$", isMoney: false, isNegativeCAC: false },
+  { label: "Effective CAC", value: dashboardMetricsObj.effectiveCAC, prefix: "$", isMoney: false, isNegativeCAC: true },
+];
 
 function LiveIndicator() {
   return (
@@ -147,7 +161,7 @@ function FunnelVisualization() {
               <span className="text-[#999]">{stage.label}</span>
               <span className="font-mono text-[#F5F5F5]">
                 {stage.value.toLocaleString()}{" "}
-                <span className="text-[#666]">({stage.pct}%)</span>
+                <span className="text-[#666]">({stage.percentage}%)</span>
               </span>
             </div>
             <div className="h-2 bg-[#1a1a1a] rounded-full overflow-hidden">
@@ -160,7 +174,7 @@ function FunnelVisualization() {
                       : `rgba(0, 229, 204, ${1 - i * 0.18})`,
                 }}
                 initial={{ width: 0 }}
-                whileInView={{ width: `${stage.pct}%` }}
+                whileInView={{ width: `${stage.percentage}%` }}
                 viewport={{ once: true }}
                 transition={{
                   duration: 0.8,

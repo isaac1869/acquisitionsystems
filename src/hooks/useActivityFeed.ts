@@ -1,12 +1,17 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { feedEvents, FeedEvent } from "@/lib/demoData";
+import { activityFeedEvents } from "@/lib/demoData";
 import { TIMING } from "@/lib/demoConstants";
 
-export interface LiveFeedEvent extends FeedEvent {
+export interface LiveFeedEvent {
   id: string;
+  type: string;
+  icon: string;
+  message: string;
+  location?: string;
   timestamp: string;
+  isHighlight?: boolean;
 }
 
 export function useActivityFeed(isActive: boolean = true) {
@@ -15,7 +20,7 @@ export function useActivityFeed(isActive: boolean = true) {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const addEvent = useCallback(() => {
-    const source = feedEvents[indexRef.current % feedEvents.length];
+    const source = activityFeedEvents[indexRef.current % activityFeedEvents.length];
     const newEvent: LiveFeedEvent = {
       ...source,
       id: `event-${Date.now()}-${indexRef.current}`,
@@ -26,7 +31,8 @@ export function useActivityFeed(isActive: boolean = true) {
       const updated = [newEvent, ...prev];
       return updated.slice(0, 12).map((e, i) => ({
         ...e,
-        timestamp: i === 0 ? "just now" : i === 1 ? "5s ago" : i < 4 ? `${i * 8}s ago` : `${i}m ago`,
+        timestamp:
+          i === 0 ? "just now" : i === 1 ? "5s ago" : i < 4 ? `${i * 8}s ago` : `${i}m ago`,
       }));
     });
 

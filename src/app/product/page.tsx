@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProductPage } from "@/components/demo";
+import ProductPageContent from "@/components/ProductPageContent";
 
 const description =
   "Three layers, one acquisition engine: Intellibook, AI SDR Twin, and CoreText. Deep dive into the system.";
@@ -15,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ProductPage />;
+  return <ProductPageContent />;
 }
