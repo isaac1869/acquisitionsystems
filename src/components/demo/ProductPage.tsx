@@ -3,9 +3,7 @@
 
 import { motion } from "framer-motion";
 import { FadeReveal } from "@/components/demo/FadeReveal";
-import { ReaderExperience } from "@/components/demo/ReaderExperience";
-import { CoreTextDashboard } from "@/components/demo/CoreTextDashboard";
-import { Economics } from "@/components/demo/Economics";
+import { IntellibookDemoSlides } from "@/components/demo/IntellibookDemoSlides";
 import { LINKS } from "@/lib/demoConstants";
 
 // ─── HERO ────────────────────────────────────────────────────────
@@ -341,22 +339,15 @@ export function ProductPage() {
     <div className="bg-[#0A0A0A] min-h-screen">
       <Hero />
 
-      {/* === INTERACTIVE DEMO === */}
+      {/* === INTERACTIVE DEMO (10-slide deck matching intellibook-demo.vercel.app) === */}
       <div id="demo">
         <SectionDivider />
-
-        {/* Transition into demo */}
         <FadeReveal className="text-center py-8 px-6">
           <p className="text-[#666] text-xs font-mono uppercase tracking-[0.3em]">
             Experience the system
           </p>
         </FadeReveal>
-
-        <ReaderExperience />
-        <SectionDivider />
-        <CoreTextDashboard />
-        <SectionDivider />
-        <Economics />
+        <IntellibookDemoSlides />
       </div>
 
       {/* Transition out of demo */}
