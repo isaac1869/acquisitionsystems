@@ -1,0 +1,54 @@
+"use client";
+
+import { useState, useEffect, useCallback, useRef } from "react";
+import { feedEvents, FeedEvent } from "@/lib/demoData";
+import { TIMING } from "@/lib/demoConstants";
+
+export interface LiveFeedEvent extends FeedEvent {
+  id: string;
+  timestamp: string;
+}
+
+export function useActivityFeed(isActive: boolean = true) {
+  const [events, setEvents] = useState<LiveFeedEvent[]>([]);
+  const indexRef = useRef(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const addEvent = useCallback(() => {
+    const source = feedEvents[indexRef.current % feedEvents.length];
+    const newEvent: LiveFeedEvent = {
+      ...source,
+      id: `event-${Date.now()}-${indexRef.current}`,
+      timestamp: "just now",
+    };
+
+    setEvents((prev) => {
+      const updated = [newEvent, ...prev];
+      return updated.slice(0, 12).map((e, i) => ({
+        ...e,
+        timestamp: i === 0 ? "just now" : i === 1 ? "5s ago" : i < 4 ? `${i * 8}s ago` : `${i}m ago`,
+      }));
+    });
+
+    indexRef.current += 1;
+  }, []);
+
+  useEffect(() => {
+    if (!isActive) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      return;
+    }
+
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => addEvent(), i * 400);
+    }
+
+    timerRef.current = setInterval(addEvent, TIMING.activityFeedInterval);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isActive, addEvent]);
+
+  return events;
+}
