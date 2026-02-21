@@ -1,4 +1,3 @@
-// components/ui/FadeReveal.tsx
 "use client";
 
 import { motion } from "framer-motion";

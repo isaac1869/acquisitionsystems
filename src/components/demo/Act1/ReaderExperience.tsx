@@ -1,9 +1,8 @@
-// components/Act1/ReaderExperience.tsx
 "use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FadeReveal } from "@/components/demo/FadeReveal";
+import { FadeReveal } from "../ui/FadeReveal";
 import { bookPageContent, aiTwinConversations } from "@/lib/demoData";
 
 function BookMockup({ onQRClick }: { onQRClick: () => void }) {
@@ -17,10 +16,7 @@ function BookMockup({ onQRClick }: { onQRClick: () => void }) {
             boxShadow: "20px 20px 60px rgba(0,0,0,0.6), -2px -2px 10px rgba(255,255,255,0.03)",
           }}
         >
-          {/* Book spine accent */}
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#00E5CC]" />
-
-          {/* Page content */}
           <div className="p-6 md:p-8">
             <p className="text-[#00E5CC] text-xs font-mono uppercase tracking-widest mb-4">
               {bookPageContent.chapterTitle}
@@ -30,8 +26,6 @@ function BookMockup({ onQRClick }: { onQRClick: () => void }) {
                 <p key={i}>{p}</p>
               ))}
             </div>
-
-            {/* QR Trigger */}
             <motion.div
               className="mt-6 border border-[rgba(0,229,204,0.25)] rounded-lg p-4 cursor-pointer group"
               whileHover={{ borderColor: "rgba(0,229,204,0.6)" }}
@@ -97,7 +91,6 @@ function AITwinChat() {
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="bg-[#111] border border-[rgba(255,255,255,0.06)] rounded-xl overflow-hidden">
-        {/* Chat header */}
         <div className="px-4 py-3 border-b border-[rgba(255,255,255,0.06)] flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-[#00E5CC]/20 flex items-center justify-center">
             <span className="text-[#00E5CC] text-xs font-mono">AI</span>
@@ -110,8 +103,6 @@ function AITwinChat() {
             </p>
           </div>
         </div>
-
-        {/* Chat body */}
         <div className="p-4 min-h-[300px] max-h-[400px] overflow-y-auto space-y-3">
           {!conversation ? (
             <div className="space-y-3">
@@ -169,8 +160,6 @@ function AITwinChat() {
             </AnimatePresence>
           )}
         </div>
-
-        {/* Reset button */}
         {selectedPath !== null && (
           <div className="px-4 py-3 border-t border-[rgba(255,255,255,0.06)]">
             <button
@@ -191,26 +180,16 @@ export function ReaderExperience() {
 
   return (
     <section className="py-24 relative">
-      {/* Act label */}
       <FadeReveal className="text-center mb-16">
-        <p className="text-[#00E5CC] text-xs font-mono uppercase tracking-[0.3em] mb-3">
-          Act 1
-        </p>
-        <h2 className="text-3xl md:text-4xl font-semibold text-[#F5F5F5]">
-          The Reader Experience
-        </h2>
-        <p className="text-[#666] mt-3 text-lg">
-          What your future client sees
-        </p>
+        <p className="text-[#00E5CC] text-xs font-mono uppercase tracking-[0.3em] mb-3">Act 1</p>
+        <h2 className="text-3xl md:text-4xl font-semibold text-[#F5F5F5]">The Reader Experience</h2>
+        <p className="text-[#666] mt-3 text-lg">What your future client sees</p>
       </FadeReveal>
 
       <div className="max-w-5xl mx-auto px-6 space-y-20">
-        {/* Scene 1: The Book */}
         <div className="space-y-8">
           <FadeReveal className="text-center">
-            <p className="text-[#999] text-lg">
-              Your book arrives. But this isn&apos;t an ordinary book.
-            </p>
+            <p className="text-[#999] text-lg">Your book arrives. But this isn&apos;t an ordinary book.</p>
           </FadeReveal>
           <BookMockup onQRClick={() => setShowChat(true)} />
           <FadeReveal className="text-center max-w-xl mx-auto" delay={0.3}>
@@ -221,7 +200,6 @@ export function ReaderExperience() {
           </FadeReveal>
         </div>
 
-        {/* Scene 2: AI Twin Chat */}
         <AnimatePresence>
           {showChat && (
             <motion.div
@@ -245,9 +223,7 @@ export function ReaderExperience() {
 
         {!showChat && (
           <FadeReveal className="text-center">
-            <p className="text-[#666] text-sm">
-              ↑ Click the QR code above to see the AI Author Twin in action
-            </p>
+            <p className="text-[#666] text-sm">↑ Click the QR code above to see the AI Author Twin in action</p>
           </FadeReveal>
         )}
       </div>

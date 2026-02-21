@@ -1,4 +1,3 @@
-// components/ui/AnimatedNumber.tsx
 "use client";
 
 import { useCountUp } from "@/hooks/useCountUp";

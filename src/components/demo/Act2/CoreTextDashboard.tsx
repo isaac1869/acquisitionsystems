@@ -1,10 +1,9 @@
-// components/Act2/CoreTextDashboard.tsx
 "use client";
 
 import { useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { FadeReveal } from "@/components/demo/FadeReveal";
-import { AnimatedNumber } from "@/components/demo/AnimatedNumber";
+import { FadeReveal } from "../ui/FadeReveal";
+import { AnimatedNumber } from "../ui/AnimatedNumber";
 import { useActivityFeed } from "@/hooks/useActivityFeed";
 import { dashboardMetrics, funnelStages, attributionNodes } from "@/lib/demoData";
 
@@ -37,9 +36,7 @@ function MetricsPanel() {
               : "border-[rgba(255,255,255,0.06)] bg-[#111]"
           }`}
         >
-          <p className="text-[#666] text-xs font-mono uppercase tracking-wider">
-            {metric.label}
-          </p>
+          <p className="text-[#666] text-xs font-mono uppercase tracking-wider">{metric.label}</p>
           <div className={`text-2xl font-bold mt-1 ${
             metric.isNegativeCAC ? "text-[#00E5CC]" : metric.isMoney ? "text-[#FFB800]" : "text-[#F5F5F5]"
           }`}>
@@ -88,9 +85,7 @@ function ActivityFeed() {
                   {event.message}
                 </p>
                 <div className="flex items-center gap-2 mt-0.5">
-                  {event.location && (
-                    <span className="text-[#666] text-xs">{event.location}</span>
-                  )}
+                  {event.location && <span className="text-[#666] text-xs">{event.location}</span>}
                   <span className="text-[#444] text-xs font-mono">{event.timestamp}</span>
                 </div>
               </div>
@@ -146,17 +141,11 @@ function AttributionTimeline() {
   return (
     <FadeReveal className="mt-16">
       <div className="text-center mb-8">
-        <h3 className="text-xl font-semibold text-[#F5F5F5]">
-          Full Attribution: Book → Client
-        </h3>
-        <p className="text-[#666] text-sm mt-2">
-          Every step tracked. No guessing.
-        </p>
+        <h3 className="text-xl font-semibold text-[#F5F5F5]">Full Attribution: Book → Client</h3>
+        <p className="text-[#666] text-sm mt-2">Every step tracked. No guessing.</p>
       </div>
 
-      {/* Desktop: horizontal timeline */}
       <div className="hidden md:block relative">
-        {/* Connecting line */}
         <div className="absolute top-6 left-0 right-0 h-px bg-[rgba(255,255,255,0.06)]" />
         <motion.div
           className="absolute top-6 left-0 h-px bg-[#00E5CC]"
@@ -165,7 +154,6 @@ function AttributionTimeline() {
           viewport={{ once: true }}
           transition={{ duration: 2, ease: "easeOut" }}
         />
-
         <div className="flex justify-between relative">
           {attributionNodes.map((node, i) => (
             <motion.div
@@ -176,7 +164,6 @@ function AttributionTimeline() {
               transition={{ delay: 0.3 + i * 0.25 }}
               className="flex flex-col items-center text-center w-[13%] group"
             >
-              {/* Node dot */}
               <motion.div
                 className={`w-3 h-3 rounded-full mb-3 z-10 ${
                   node.type === "close" ? "bg-[#FFB800]" : "bg-[#00E5CC]"
@@ -188,11 +175,8 @@ function AttributionTimeline() {
                 }
                 transition={{ duration: 2, repeat: Infinity }}
               />
-
               <p className="text-[#666] text-xs font-mono mb-1">Day {node.day}</p>
-              <p className={`text-xs font-medium ${
-                node.type === "close" ? "text-[#FFB800]" : "text-[#F5F5F5]"
-              }`}>
+              <p className={`text-xs font-medium ${node.type === "close" ? "text-[#FFB800]" : "text-[#F5F5F5]"}`}>
                 {node.event}
               </p>
               <p className="text-[#444] text-[10px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity max-w-[120px]">
@@ -203,7 +187,6 @@ function AttributionTimeline() {
         </div>
       </div>
 
-      {/* Mobile: vertical timeline */}
       <div className="md:hidden space-y-4 relative pl-8">
         <div className="absolute left-3 top-0 bottom-0 w-px bg-[rgba(255,255,255,0.06)]" />
         {attributionNodes.map((node, i) => (
@@ -219,9 +202,7 @@ function AttributionTimeline() {
               node.type === "close" ? "bg-[#FFB800]" : "bg-[#00E5CC]"
             }`} />
             <p className="text-[#666] text-xs font-mono">Day {node.day} · {node.date}</p>
-            <p className={`text-sm font-medium ${
-              node.type === "close" ? "text-[#FFB800]" : "text-[#F5F5F5]"
-            }`}>
+            <p className={`text-sm font-medium ${node.type === "close" ? "text-[#FFB800]" : "text-[#F5F5F5]"}`}>
               {node.event}
             </p>
             <p className="text-[#444] text-xs">{node.detail}</p>
@@ -231,9 +212,7 @@ function AttributionTimeline() {
 
       <FadeReveal delay={0.5} className="text-center mt-8">
         <p className="text-[#666] text-sm italic">
-          Full 1:1 attribution from ad click to closed deal.
-          <br />
-          Try getting this from Facebook Ads Manager.
+          Full 1:1 attribution from ad click to closed deal. Try getting this from Facebook Ads Manager.
         </p>
       </FadeReveal>
     </FadeReveal>
@@ -243,32 +222,21 @@ function AttributionTimeline() {
 export function CoreTextDashboard() {
   return (
     <section className="py-24 relative">
-      {/* Act label */}
       <FadeReveal className="text-center mb-12">
-        <p className="text-[#00E5CC] text-xs font-mono uppercase tracking-[0.3em] mb-3">
-          Act 2
-        </p>
-        <h2 className="text-3xl md:text-4xl font-semibold text-[#F5F5F5]">
-          The Expert Dashboard
-        </h2>
-        <p className="text-[#666] mt-3 text-lg">
-          What YOU see
-        </p>
+        <p className="text-[#00E5CC] text-xs font-mono uppercase tracking-[0.3em] mb-3">Act 2</p>
+        <h2 className="text-3xl md:text-4xl font-semibold text-[#F5F5F5]">The Expert Dashboard</h2>
+        <p className="text-[#666] mt-3 text-lg">What YOU see</p>
       </FadeReveal>
 
-      {/* Dashboard */}
       <div className="max-w-7xl mx-auto px-4">
         <FadeReveal>
           <div className="bg-[#0A0A0A] border border-[rgba(255,255,255,0.06)] rounded-2xl overflow-hidden">
-            {/* Dashboard header */}
             <div className="px-6 py-4 border-b border-[rgba(255,255,255,0.06)] flex items-center justify-between bg-[#0d0d0d]">
               <div className="flex items-center gap-3">
                 <div className="w-6 h-6 rounded bg-[#00E5CC]/20 flex items-center justify-center">
                   <div className="w-3 h-3 rounded-sm bg-[#00E5CC]" />
                 </div>
-                <span className="text-[#F5F5F5] font-medium text-sm">
-                  CoreText Intelligence Engine
-                </span>
+                <span className="text-[#F5F5F5] font-medium text-sm">CoreText Intelligence Engine</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-[#444] text-xs font-mono hidden sm:inline">
@@ -277,28 +245,14 @@ export function CoreTextDashboard() {
                 <LiveIndicator />
               </div>
             </div>
-
-            {/* Dashboard body */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 p-4">
-              {/* Left: Metrics */}
-              <div className="lg:col-span-3">
-                <MetricsPanel />
-              </div>
-
-              {/* Center: Activity Feed */}
-              <div className="lg:col-span-5">
-                <ActivityFeed />
-              </div>
-
-              {/* Right: Funnel */}
-              <div className="lg:col-span-4">
-                <FunnelVisualization />
-              </div>
+              <div className="lg:col-span-3"><MetricsPanel /></div>
+              <div className="lg:col-span-5"><ActivityFeed /></div>
+              <div className="lg:col-span-4"><FunnelVisualization /></div>
             </div>
           </div>
         </FadeReveal>
 
-        {/* Callout */}
         <FadeReveal delay={0.3} className="text-center mt-8">
           <p className="text-[#999] text-sm">
             For the first time in publishing history, you can see exactly which reader became
@@ -306,7 +260,6 @@ export function CoreTextDashboard() {
           </p>
         </FadeReveal>
 
-        {/* Attribution Timeline */}
         <AttributionTimeline />
       </div>
     </section>

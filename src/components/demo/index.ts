@@ -1,8 +1,4 @@
-// components/demo/index.ts
-// Import this in your product page: import { ProductPage } from "@/components/demo"
-
 export { ProductPage } from "./ProductPage";
-export { IntellibookDemoSlides } from "./IntellibookDemoSlides";
-export { ReaderExperience } from "./ReaderExperience";
-export { CoreTextDashboard } from "./CoreTextDashboard";
-export { Economics } from "./Economics";
+export { ReaderExperience } from "./Act1/ReaderExperience";
+export { CoreTextDashboard } from "./Act2/CoreTextDashboard";
+export { Economics } from "./Act3/Economics";
