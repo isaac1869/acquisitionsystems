@@ -2,142 +2,102 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import SectionWrapper from "@/components/SectionWrapper";
+import Button from "@/components/Button";
 
-const fade = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function CheckIcon() {
   return (
-    <p className="text-[#00E5CC] text-xs font-mono uppercase tracking-[0.3em] mb-3">{children}</p>
+    <svg className="w-3 h-3 text-electric-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+    </svg>
   );
 }
 
-function Divider() {
+function CrossIcon() {
   return (
-    <div className="flex justify-center py-1">
-      <div className="w-px h-12 bg-gradient-to-b from-transparent via-[rgba(0,229,204,0.15)] to-transparent" />
-    </div>
+    <svg className="w-3 h-3 text-gray-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    </svg>
   );
 }
 
 export default function ProductPageContent() {
   return (
-    <main className="bg-[#0A0A0A] min-h-screen">
+    <div className="bg-white min-h-screen">
+
       {/* Hero */}
-      <section className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6 relative">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        />
+      <section className="pt-20 md:pt-28 pb-16 md:pb-20 px-6 text-center">
         <motion.div
-          className="relative z-10 max-w-4xl"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.15 } },
-          }}
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <motion.p
-            className="text-[#00E5CC] text-xs font-mono uppercase tracking-[0.3em] mb-6"
-            variants={fade}
-          >
+          <p className="text-xs font-mono uppercase tracking-[0.3em] text-electric-cyan mb-5">
             Your book is not a book
-          </motion.p>
-          <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-semibold text-[#F5F5F5] leading-[1.1] mb-6"
-            variants={fade}
-          >
+          </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 leading-[1.1] mb-6">
             It&apos;s a client acquisition engine with{" "}
-            <span className="text-[#00E5CC]">negative CAC</span>.
-          </motion.h1>
-          <motion.p
-            className="text-[#666] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
-            variants={fade}
-          >
+            <span className="text-electric-cyan">negative CAC</span>.
+          </h1>
+          <p className="text-gray-500 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
             Intellibook turns a single book into a system that acquires high-ticket clients at a
             lower cost than Meta or Google — and keeps working after you stop spending.
-          </motion.p>
-          <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4" variants={fade}>
-            <Link
-              href="/demo"
-              className="px-8 py-3.5 bg-[#00E5CC] text-[#0A0A0A] font-semibold rounded-lg text-sm hover:bg-[#00D4BB] transition-colors"
-            >
-              See It In Action →
-            </Link>
-            <Link
-              href="/apply"
-              className="px-8 py-3.5 border border-[rgba(255,255,255,0.12)] text-[#F5F5F5] font-medium rounded-lg text-sm hover:border-[rgba(255,255,255,0.25)] transition-colors"
-            >
-              Apply for Early Access
-            </Link>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      <Divider />
-
-      {/* Demo CTA block */}
-      <section className="py-16 px-6">
-        <motion.div
-          className="max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <div className="bg-[#111] border border-[rgba(0,229,204,0.15)] rounded-2xl p-10 relative overflow-hidden">
-            <div
-              className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[200px] opacity-10 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse, #00E5CC, transparent 70%)" }}
-            />
-            <div className="relative z-10">
-              <SectionLabel>Interactive Demo</SectionLabel>
-              <h2 className="text-2xl md:text-3xl font-semibold text-[#F5F5F5] mb-4">
-                Don&apos;t just read about it. Experience it.
-              </h2>
-              <p className="text-[#666] text-sm leading-relaxed mb-8 max-w-xl mx-auto">
-                Walk through the full Intellibook system — from what your reader sees inside an
-                instrumented book, to the CoreText intelligence dashboard, to the economics that
-                make client acquisition cost negative.
-              </p>
-              <Link
-                href="/demo"
-                className="inline-block px-10 py-4 bg-[#00E5CC] text-[#0A0A0A] font-semibold rounded-lg hover:bg-[#00D4BB] transition-colors text-sm"
-              >
-                Launch the Interactive Demo →
-              </Link>
-              <p className="text-[#333] text-xs mt-4 font-mono">
-                3 acts · 10 scenes · Click-through or keyboard navigation
-              </p>
-            </div>
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button href="/demo">SEE IT IN ACTION →</Button>
+            <Button href="/apply" variant="secondary">Apply for Early Access</Button>
           </div>
         </motion.div>
       </section>
 
-      <Divider />
+      {/* Demo CTA */}
+      <SectionWrapper bg="gray">
+        <motion.div
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="border border-gray-200 rounded-2xl p-10 md:p-14 text-center bg-white shadow-sm">
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-electric-cyan mb-4">
+              Interactive Demo
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 mb-4">
+              Don&apos;t just read about it. Experience it.
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+              Walk through the full Intellibook system — from what your reader sees inside an
+              instrumented book, to the CoreText intelligence dashboard, to the economics that make
+              client acquisition cost negative.
+            </p>
+            <Button href="/demo">LAUNCH THE INTERACTIVE DEMO →</Button>
+            <p className="text-gray-400 text-xs mt-4 font-mono">
+              3 acts · 10 scenes · Click-through or keyboard navigation
+            </p>
+          </div>
+        </motion.div>
+      </SectionWrapper>
 
       {/* How it works */}
-      <section className="py-20 px-6">
+      <SectionWrapper>
         <div className="max-w-5xl mx-auto">
           <motion.div
-            className="text-center mb-14"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <SectionLabel>The System</SectionLabel>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#F5F5F5]">
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-electric-cyan mb-3">
+              The System
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900">
               Three layers. One loop.
             </h2>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 label: "Capture",
@@ -160,38 +120,54 @@ export default function ProductPageContent() {
             ].map((item, i) => (
               <motion.div
                 key={item.label}
-                className="bg-[#111] border border-[rgba(255,255,255,0.06)] rounded-xl p-6 hover:border-[rgba(0,229,204,0.15)] transition-colors"
+                className="p-6 rounded-xl border border-gray-100 bg-gray-50/50 hover:border-gray-200 transition-colors"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12, duration: 0.6 }}
               >
                 <span className="text-2xl">{item.icon}</span>
-                <p className="text-[#00E5CC] text-[10px] font-mono uppercase tracking-widest mt-4 mb-2">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-electric-cyan mt-4 mb-2">
                   {item.label}
                 </p>
-                <h3 className="text-[#F5F5F5] font-semibold text-base mb-3">{item.title}</h3>
-                <p className="text-[#555] text-sm leading-relaxed">{item.body}</p>
+                <h3 className="text-gray-900 font-semibold text-base mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.body}</p>
               </motion.div>
             ))}
           </div>
+          <motion.div
+            className="flex items-center justify-center gap-3 mt-10 flex-wrap"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            {["Capture", "Qualify", "Attribute", "Optimize", "Compound"].map((step, i) => (
+              <span key={step} className="flex items-center gap-3 text-sm">
+                <span className="text-electric-cyan font-mono">{step}</span>
+                {i < 4 && <span className="text-gray-200">→</span>}
+              </span>
+            ))}
+          </motion.div>
         </div>
-      </section>
-
-      <Divider />
+      </SectionWrapper>
 
       {/* What's included */}
-      <section className="py-20 px-6">
+      <SectionWrapper bg="gray">
         <div className="max-w-5xl mx-auto">
           <motion.div
-            className="text-center mb-14"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <SectionLabel>Deliverables</SectionLabel>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#F5F5F5]">What&apos;s included</h2>
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-electric-cyan mb-3">
+              Deliverables
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900">
+              What&apos;s included
+            </h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
@@ -222,99 +198,97 @@ export default function ProductPageContent() {
             ].map((item, i) => (
               <motion.div
                 key={item.title}
-                className="p-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#111] hover:border-[rgba(255,255,255,0.1)] transition-colors"
+                className="p-5 rounded-xl border border-gray-100 bg-white hover:border-gray-200 transition-colors"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07, duration: 0.5 }}
               >
-                <h3 className="text-[#F5F5F5] font-medium text-sm mb-2">{item.title}</h3>
-                <p className="text-[#555] text-sm leading-relaxed">{item.body}</p>
+                <h3 className="text-gray-900 font-medium text-sm mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.body}</p>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
-
-      <Divider />
+      </SectionWrapper>
 
       {/* Calculator CTA */}
-      <section className="py-16 px-6 text-center">
+      <SectionWrapper>
         <motion.div
+          className="max-w-xl mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <SectionLabel>Your Numbers</SectionLabel>
-          <h2 className="text-2xl md:text-3xl font-semibold text-[#F5F5F5] mb-4">
+          <p className="text-xs font-mono uppercase tracking-[0.3em] text-electric-cyan mb-3">
+            Your Numbers
+          </p>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 mb-4">
             Want to see the math with your numbers?
           </h2>
-          <p className="text-[#555] mt-2 mb-8 max-w-md mx-auto text-sm">
+          <p className="text-gray-500 text-sm leading-relaxed mb-8">
             Input your ad spend, close rate, and program price. See exactly what your client
             acquisition cost becomes.
           </p>
-          <Link
-            href="/calculator"
-            className="inline-block px-8 py-3 border border-[#FFB800] text-[#FFB800] font-medium rounded-lg text-sm hover:bg-[rgba(255,184,0,0.08)] transition-colors"
-          >
-            Run Your Numbers →
-          </Link>
+          <Button href="/calculator" variant="secondary">Run Your Numbers →</Button>
         </motion.div>
-      </section>
-
-      <Divider />
+      </SectionWrapper>
 
       {/* Qualification */}
-      <section className="py-20 px-6">
+      <SectionWrapper bg="gray">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            className="text-center mb-14"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <SectionLabel>Fit Check</SectionLabel>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#F5F5F5]">
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-electric-cyan mb-3">
+              Fit Check
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900">
               This is built for a specific operator
             </h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <motion.div
-              className="bg-[#111] border border-[rgba(0,229,204,0.15)] rounded-xl p-6"
+              className="bg-white border border-gray-200 rounded-xl p-6"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="text-[#00E5CC] text-[10px] font-mono uppercase tracking-widest mb-5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-electric-cyan mb-5">
                 This is for you if...
               </p>
               <div className="space-y-3">
                 {[
                   "You run a 7-8 figure business in health, wealth, or mindset",
-                  "You have a proven high-ticket offer ($5K-$25K+) that closes",
-                  "You're spending $10K-$100K+/month on Meta or Google",
+                  "You have a proven high-ticket offer ($5K–$25K+) that closes",
+                  "You're spending $10K–$100K+/month on Meta or Google",
                   "You have a sales team or process that converts qualified leads",
                   "You think in CAC, LTV, and pipeline velocity — not vanity metrics",
                   "You want an asset that compounds, not an expense that resets monthly",
                 ].map((item) => (
-                  <p key={item} className="text-[#888] text-sm flex items-start gap-2.5">
-                    <span className="text-[#00E5CC] flex-shrink-0 mt-0.5">✓</span>
+                  <li key={item} className="text-gray-700 text-sm flex items-start gap-2.5 list-none">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-electric-cyan/20 flex items-center justify-center mt-0.5">
+                      <CheckIcon />
+                    </span>
                     {item}
-                  </p>
+                  </li>
                 ))}
               </div>
             </motion.div>
             <motion.div
-              className="bg-[#111] border border-[rgba(255,255,255,0.06)] rounded-xl p-6"
+              className="bg-white border border-gray-200 rounded-xl p-6"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.15, duration: 0.6 }}
             >
-              <p className="text-[#555] text-[10px] font-mono uppercase tracking-widest mb-5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-gray-400 mb-5">
                 This is not for you if...
               </p>
               <div className="space-y-3">
@@ -325,61 +299,52 @@ export default function ProductPageContent() {
                   "You're evaluating this as a publishing investment",
                   "You're looking for the cheapest option",
                 ].map((item) => (
-                  <p key={item} className="text-[#555] text-sm flex items-start gap-2.5">
-                    <span className="text-[#333] flex-shrink-0 mt-0.5">✕</span>
+                  <li key={item} className="text-gray-400 text-sm flex items-start gap-2.5 list-none">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center mt-0.5">
+                      <CrossIcon />
+                    </span>
                     {item}
-                  </p>
+                  </li>
                 ))}
               </div>
             </motion.div>
           </div>
+          <motion.p
+            className="text-gray-400 text-sm text-center mt-8 max-w-lg mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            If you meet the criteria on the left, the ROI math is straightforward. If you&apos;re on the
+            right, we&apos;ll tell you that on the first call — we don&apos;t take clients we can&apos;t
+            deliver for.
+          </motion.p>
         </div>
-      </section>
+      </SectionWrapper>
 
       {/* Final CTA */}
-      <section className="py-20 px-6">
-        <motion.div
-          className="max-w-2xl mx-auto text-center bg-[#111] border border-[rgba(0,229,204,0.15)] rounded-2xl p-10 md:p-14 relative overflow-hidden"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <div
-            className="absolute -top-20 left-1/2 -translate-x-1/2 w-[400px] h-[200px] opacity-10 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse, #00E5CC, transparent 70%)" }}
-          />
-          <div className="relative z-10">
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#F5F5F5] leading-tight">
-              One expert brand per month.
-              <br />
-              Application-based. Capacity-limited.
-            </h2>
-            <p className="text-[#666] mt-6 leading-relaxed text-sm md:text-base">
-              We review every application against three criteria: a compelling methodology, a proven
-              high-ticket offer running paid traffic, and the revenue to invest strategically. If you
-              qualify, we&apos;ll show you the model with your numbers.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-              <Link
-                href="/apply"
-                className="px-10 py-4 bg-[#00E5CC] text-[#0A0A0A] font-semibold rounded-lg hover:bg-[#00D4BB] transition-colors text-sm"
-              >
-                Apply for Early Access
-              </Link>
-              <Link
-                href="/demo"
-                className="px-8 py-4 border border-[rgba(255,255,255,0.12)] text-[#999] rounded-lg hover:border-[rgba(255,255,255,0.25)] hover:text-[#F5F5F5] transition-colors text-sm"
-              >
-                See the Demo First →
-              </Link>
-            </div>
-            <p className="text-[#333] text-xs mt-5">
-              Application takes 3 minutes. First call is a no-obligation system walkthrough.
-            </p>
+      <SectionWrapper id="apply" bg="gray">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 mb-3">
+            One expert brand per month.
+            <br />
+            Application-based. Capacity-limited.
+          </h2>
+          <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+            We review every application against three criteria: a compelling methodology, a proven
+            high-ticket offer running paid traffic, and the revenue to invest strategically.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button href="/apply">APPLY FOR EARLY ACCESS</Button>
+            <Button href="/demo" variant="secondary">See the Demo First →</Button>
           </div>
-        </motion.div>
-      </section>
-    </main>
+          <p className="text-gray-400 text-xs mt-5">
+            Application takes 3 minutes. First call is a no-obligation system walkthrough.
+          </p>
+        </div>
+      </SectionWrapper>
+
+    </div>
   );
 }

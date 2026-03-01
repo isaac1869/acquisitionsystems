@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, DM_Sans } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import StickyCTA from "@/components/StickyCTA";
+import DemoLayoutWrapper from "@/components/DemoLayoutWrapper";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -17,6 +18,13 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-mono",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -49,13 +57,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${dmSans.variable}`}>
       <body className="bg-white text-gray-900 antialiased overflow-x-hidden">
-        <Nav />
-        <main>{children}</main>
-        <Footer />
-        <StickyCTA />
-        <ScrollReveal />
+        <DemoLayoutWrapper
+          nav={<Nav />}
+          footer={<Footer />}
+          stickyCta={<StickyCTA />}
+          scrollReveal={<ScrollReveal />}
+        >
+          {children}
+        </DemoLayoutWrapper>
       </body>
     </html>
   );
