@@ -8,7 +8,7 @@ const navLinks = [
   { href: "/product", label: "Product" },
   { href: "/results", label: "Results" },
   { href: "/about", label: "About" },
-  { href: "/community", label: "Community" },
+  { href: "/playbook", label: "Playbook" },
   { href: "/contact", label: "Contact" },
 ];
 
